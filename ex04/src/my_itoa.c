@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include "../include/test.h"
 char *my_itoa(int n) {
   char *res;
@@ -17,21 +16,13 @@ char *my_itoa(int n) {
     len++;
   }
   start = (sign == -1);
-  res = malloc(len + start);
+  res = malloc(len + start + 1);
   if (start) { res[0] = '-';}
   for (int i = len + start - 1; i >= start; i--) {
-    res[i] = nn % 10;
+    res[i] = (nn % 10) +'0';
     nn = nn/10;
   }
+  res[len+start] = '\0';
   return res;
-}
-
-int main() {
-  int n = 12345689;
-  char *s = my_itoa(n);
-  for (int i=0; i < 8; i++){
-    printf("%d",s[i]);
-  }
-  return 0;
 }
 

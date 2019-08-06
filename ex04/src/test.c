@@ -5,7 +5,7 @@
 #include <string.h>
 #include "test.h"
 
-void   test_small()
+void test_small()
 {
   assert(my_atoi("0") == 0);
   assert(my_atoi("-0") == 0);
@@ -15,7 +15,7 @@ void   test_small()
   assert(my_atoi("1k") == 1);
 }
 
-void          test_long()
+void test_long()
 {
   assert(my_atoi("123456789") == 123456789);
   assert(my_atoi("2147483647") == 2147483647);
@@ -26,7 +26,7 @@ void          test_long()
   assert(my_atoi("0") == atoi("0"));
 }
 
-void          test_verif()
+void test_verif()
 {
   assert(atoi("0") == 0);
   assert(atoi("-0") == 0);
@@ -43,7 +43,7 @@ void          test_verif()
   assert(atoi("1234QWERTY1234") == 1234);
 }
 
-void    test_itoa()
+void test_itoa()
 {
 
   assert(strcmp(my_itoa(0), "0") == 0);

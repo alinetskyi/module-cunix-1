@@ -1,5 +1,5 @@
-#include <stdlib.h>
-#include <stdio.h>
+//#include <stdlib.h>
+//#include <stdio.h>
 #include "../include/test.h"
 char *my_strcpy(char *dest, const char *src) {
 	int i = 0; 
@@ -7,6 +7,7 @@ char *my_strcpy(char *dest, const char *src) {
 	  dest[i]= src[i];
 	  i++;
 	}
+	dest[i] = '\0';
 	return dest;
 }
 
