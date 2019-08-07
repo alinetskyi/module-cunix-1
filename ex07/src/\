@@ -40,21 +40,17 @@ void    list_unshift(node_t **head, void *data) {
     node_t *old_head = *head;
     node_t *new_head = malloc(sizeof(node_t));
     new_head->next = old_head;
-    new_head->data = data;
-    head = &new_head;    
-    (*head)->next = new_head;
+    new_head->data = data;    
 }
 
 void    *list_pop(node_t **head) {
     node_t *node = *head;
     if (node == NULL) { return NULL;}
-    while (node ->next->next !=  NULL){
+    while (node -> next != NULL){
        node = node->next;
     }
-    node_t *to_pop = node->next;
-    void *data = to_pop->data;
-    free(to_pop);
-    node->next = NULL;
+    void *data = node->next;
+    free(node);
     return data;
 }
   
@@ -70,9 +66,9 @@ void    *list_shift(node_t **head) {
 void    *list_remove(node_t **head, int pos) {
     node_t *node = *head;
     if (pos == 0) { return list_shift(head); }
-    int i;
+    int i = 0;
     int flag = 1;
-    for (i = 0; i < pos - 1; i++) {
+    for (i; i < pos - 1; i++) {
         if (node == NULL) {
 	    flag = 0;
 	    break;
@@ -89,7 +85,7 @@ void    *list_remove(node_t **head, int pos) {
 void    list_print(node_t *head) {
     node_t *node = head;
     while (node != NULL) {  
-        printf("%p\n",node->data);
+        printf("%s\n",node->data);
 	node = node->next;
     }
 }
@@ -112,13 +108,9 @@ int main() {
     list_push(list,"paris");
     list_push(list,"kyiv");
     list_print(list);
-    printf("11111111111111\n"); 
-    //list = list_remove(&list,0);
-    //void * data = list_pop(&list);
-    list_unshift(&list,"moscow");
-    //printf("%p\n",data);
-    
+    list = list_remove(&list,0);
+    list_shift(&list);
     printf("\n");
-    list_print(list);
+    //list_print(list);
 }
 
