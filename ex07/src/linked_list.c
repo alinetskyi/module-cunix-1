@@ -37,12 +37,10 @@ void    list_push(node_t *head, void *data) {
 }
 
 void    list_unshift(node_t **head, void *data) {
-    node_t *old_head = *head;
     node_t *new_head = malloc(sizeof(node_t));
-    new_head->next = old_head;
+    new_head->next = *head;
     new_head->data = data;
-    head = &new_head;    
-    (*head)->next = new_head;
+    *head = new_head;    
 }
 
 void    *list_pop(node_t **head) {
@@ -60,11 +58,11 @@ void    *list_pop(node_t **head) {
   
 void    *list_shift(node_t **head) {
     if (*head == NULL) { return NULL;}	
-    node_t *new_head =(*head)->next;
-    printf("11111");
-    free(*head);
-    printf("2222");
-    return new_head;
+    node_t *temp = *head;
+    *head = (*head)->next;
+    void *data = temp->data;
+    free(temp);
+    return data;
 }
 
 void    *list_remove(node_t **head, int pos) {
@@ -104,7 +102,7 @@ void    list_visitor(node_t *head, void (*fp)(void *data)) {
 
 
 
-
+/*
 int main() {
     node_t *list = list_create("madagaskar");
     list_push(list,"oslo");
@@ -115,10 +113,10 @@ int main() {
     printf("11111111111111\n"); 
     //list = list_remove(&list,0);
     //void * data = list_pop(&list);
+    printf("%p oldhead", list);
     list_unshift(&list,"moscow");
     //printf("%p\n",data);
-    
+    printf("%p oldhead", list);
     printf("\n");
-    list_print(list);
-}
-
+    list_print(list);}
+*/

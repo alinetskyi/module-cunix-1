@@ -45,12 +45,12 @@ int       test_allocation()
 
   return (0);
 }
-
+/*
 void      remove_static(node_t *node)
 {
   NULL;
 }
-
+*/
 int       test_prototyping()
 {
   node_t  *root;
@@ -94,9 +94,9 @@ int       test_smalltree()
 int   main(void)
 {
   test_allocation();
-  assert(test_prototyping() == 0);
-  assert(test_smalltree() == 0);
-  assert(test_visiting() == 0);
+  //assert(test_prototyping() == 0);
+  //assert(test_smalltree() == 0);
+  //assert(test_visiting() == 0);
 
   return (0);
 }
