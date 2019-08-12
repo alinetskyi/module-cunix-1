@@ -21,7 +21,7 @@ int       test_visiting()
   char    *val;
 
   root = NULL;
-  for (int i = 0; i <= 10000; i++) {
+  for (int i = 0; i <= 100; i++) {
     asprintf(&key, "%s%05d", "hello", i);
     asprintf(&val, "%s%05d", "world", i);
     root = insert(root, key, val);
@@ -64,7 +64,6 @@ int       test_prototyping()
   assert(strcmp(root->right->key, "world") == 0);
   assert(strcmp(root->right->data, "hello") == 0);
   destroy_tree(root, &remove_static);
-
   return (0);
 }
 
@@ -94,9 +93,8 @@ int       test_smalltree()
 int   main(void)
 {
   test_allocation();
-  assert(test_prototyping() == 0);
-  //assert(test_smalltree() == 0);
-  //assert(test_visiting() == 0);
-
+  assert(test_prototyping() == 0);  
+  assert(test_smalltree() == 0);
+  assert(test_visiting() == 0);
   return (0);
 }

@@ -7,15 +7,13 @@
 void  test_all()
 {
   my_printf("%s\n", "Hello Printf");
-  my_printf("We need 100%% of %s\n", "use case");
-  
+  my_printf("We need 100%% of %s\n", "use case"); 
   my_printf("It's %s's %s (%s)\n", "iGor", "phone", "TEXT");
   my_printf("[%10s] [%4s] [%8s] [%12s]\n", "THIS", "IS", "PADDED", "TEXT");
   my_printf("%d\n", 42);
   my_printf("%d %s\n", 42, "is the answer");
   my_printf("%010d %s\n", 42, "was padded on 10");
   my_printf("%10d %s\n", 42, "was also padded using spaces");
-
 }
 
 void  test_verif()

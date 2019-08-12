@@ -1,11 +1,16 @@
-#include <stdio.h>
-int my_puts(const char *s) {
+#include <unistd.h>
+
+int my_puts(const char *s) 
+{
   int i = 0;
-  while ( s[i] != '\0') {
-    printf("%c",s[i]);
-    i++;
+  while ( s[i] != '\0') 
+  {
+    write(1,s + i++,1);
   }
-  if (i > 0) { i--; }
-  printf("\n");
+  if (i > 0) 
+  { 
+  	i--; 
+  }	
+  write(1,"\n",1);
   return i;  
 }

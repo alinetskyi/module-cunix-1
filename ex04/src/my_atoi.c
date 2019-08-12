@@ -1,16 +1,15 @@
 #include "../include/test.h"
 
-int my_atoi(const char *nptr) {
+int my_atoi(const char *nptr) 
+{
   int res = 0;
   int i,sign = 1;
-
-  i = 0;
-  if (nptr[0] == '-') {
-          sign = -1;
-	  i = 1;
-  }
-  while ( nptr[i] != '\0') {
-    if ((nptr[i] < 48) || (nptr[i] > 57)) {
+  i = (nptr[0] == '-'); 
+  sign = sign - 2*i;
+  while ( nptr[i] != '\0') 
+  {
+    if ((nptr[i] < 48) || (nptr[i] > 57)) 
+    {
       i++;
       continue;
     } 	  
@@ -18,6 +17,6 @@ int my_atoi(const char *nptr) {
     i++;
   }
   res = res * sign;
-  return (res);
+  return res;
 }
 
