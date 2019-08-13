@@ -1,32 +1,18 @@
 #include "../include/hash.h"
 #include <stdlib.h>
-#include <string.h>
+#include <stdio.h>
 
-typedef struct node {
-  char *key;
-  void *data;
-  struct node *next;
-} node_t;
+typedef struct  node {
+    void        *data;
+    struct node *next;
+}              node_t;
 
-node_t  *list_create(void *data, char *key) 
+node_t  *list_create(void *data) 
 {
   node_t *head = malloc(sizeof(node_t));
   head->data = data;
   head->next = NULL;
-  head->key = key;
   return head;
-}
-
-unsigned int hash_func(char *key) 
-{
-  unsigned int index = 0;
-  int i = 0;
-  while (key[i] != '\0') 
-  {
-    index += (key[i] - '0');
-    i++; 
-  }
-  return index;
 }
 
 void    list_destroy(node_t **head, void (*fp)(void *data)) 
@@ -38,15 +24,13 @@ void    list_destroy(node_t **head, void (*fp)(void *data))
   {
     next = node->next;
     data = node->data;
-    fp(data);
-    free(data);
-    free(node->key);    
+    fp(data);	 
     free(node);
     node = next;
   }
 }
 
-void    list_push(node_t *head, void *data, char *key) 
+void    list_push(node_t *head, void *data) 
 {
   node_t *node = head;
   while (1) {
@@ -59,11 +43,31 @@ void    list_push(node_t *head, void *data, char *key)
   node = node->next;
   node->data = data;
   node->next = NULL; 
-  node->key = key;
+}
+
+
+unsigned int hash_func(char *key) 
+{ 
+  if (key == NULL)
+  {
+    return 0;
+  }     	
+  unsigned int index = 0;
+  int i = 0;
+  while (key[i] != '\0') 
+  {
+    index += (key[i] - '0');
+    i++; 
+  }
+  return index;
 }
 
 hashtable_t *hash_create(unsigned int size) 
-{
+{ 
+  if (size <= 0) 
+  {
+    return NULL; 	  
+  }
   hashtable_t *ht = malloc(sizeof(hashtable_t));
   ht->size = size;
   ht->table = malloc(sizeof(void*));
@@ -90,9 +94,9 @@ void hash_set(hashtable_t *ht, char *key, void *ptr, void (*fp)(void *data))
    unsigned int index = hash_func(key) & ht->size;
    void *pos = (ht->table)[index];
    if (pos == NULL) {
-     (ht->table)[index] = list_create(ptr,key);
+     (ht->table)[index] = list_create(ptr);
    } else {
-      list_push((ht->table)[index], ptr, key);  
+      list_push((ht->table)[index], ptr);  
    }
    fp(key);   
 }
@@ -102,22 +106,18 @@ void *hash_get(hashtable_t *ht, char *key)
   unsigned int index = hash_func(key) % ht->size;
   void **table = ht->table;
   node_t *head = table[index];
-  while (head != NULL) 
-  {
-    if (strcmp(head->key,key) == 0) 
-    {
-      return head->data;
-    }
-    head = head->next;
+  if (head == NULL) {
+      return NULL;
   }
-  return NULL; 
+  return head->data;
 }	
 
 
 
 
 
-//int main() 
-//{i
-//  return 0;
-///}
+int main() 
+{
+  hashtable_t *ht3 = hash_create(10000);
+  return 0;
+}
