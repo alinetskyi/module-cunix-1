@@ -1,3 +1,4 @@
+
 #include "hash.h"
 
 #define _GNU_SOURCE
@@ -19,14 +20,14 @@ int               test_create()
   for (int i = 0; i < 128; i++)
     ht1->table[i] = NULL;
 
-  //hashtable_t *ht2 = hash_create(1);
-  //hashtable_t *ht3 = hash_create(10000);
+  hashtable_t *ht2 = hash_create(1);
+  hashtable_t *ht3 = hash_create(10000);
   hashtable_t *ht4 = hash_create(0);
   assert(ht4 == NULL);
 
   hash_destroy(ht1, &test_func_noop);
-  //hash_destroy(ht2, &test_func_noop);
-  //hash_destroy(ht3, &test_func_noop);
+  hash_destroy(ht2, &test_func_noop);
+  hash_destroy(ht3, &test_func_noop);
   return 0;
 }
 
@@ -101,13 +102,13 @@ int main()
   puts("test_hashfunc OK");
 
   assert(test_create() == 0);
-  //puts("test_create OK");
+  puts("test_create OK");
 
-  //assert(test_hash_set() == 0);
-  //puts("test_hash_set OK");
+  assert(test_hash_set() == 0);
+  puts("test_hash_set OK");
 
- //assert(test_large() == 0);
-  //puts("test_large OK");
+ assert(test_large() == 0);
+  puts("test_large OK");
 
   return 0;
 }
