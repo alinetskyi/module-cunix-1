@@ -56,9 +56,8 @@ char *remove_spaces(char **line_t)
 
 int print_variable(char *line)
 {
-    printf("LOLOL   %s 1\n",line);
     void *data = hash_get(env,line);
-    printf("%p\n",data);
+    printf("%s\n",data);
 }
 
 int run_exit(char *line) 
@@ -76,6 +75,7 @@ int run_pwd(char *line)
    {
        char my_cwd[1024];
        getcwd(my_cwd, 1024);
+       //printf("%s",my_cwd);
        printf("%s\n", my_cwd);
        return 1;
    }

@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef struct  node {
     void        *data;
@@ -38,7 +39,13 @@ void    list_destroy(node_t **head)
 void    list_push(node_t *head, void *data,char *key) 
 {
   node_t *node = head;
-  while (1) {
+  while (1) 
+  {
+    if (strcmp(node->key,key) == 0) 
+    { 
+        node->data = data;
+	return;
+    }	    
     if (node->next == NULL) {
 	  node->next = malloc(sizeof(node_t));
 	  break;	    
@@ -128,7 +135,7 @@ void *hash_get(hashtable_t *ht, char *key)
   if (head == NULL) {
       return NULL;
   }
-  while (head->key != key) 
+  while (strcmp(head->key,key) != 0) 
   {
     head=head->next;
   }
@@ -150,8 +157,12 @@ void print_table(hashtable_t *ht)
     }
 }
 
-//int main() {
-//    hashtable_t *ht =hash_create(10);
-//    hash_set(ht,"a","123");
-//    printf("%s",hash_get(ht,"a"));
-//}
+/*
+int main() {
+    hashtable_t *ht =hash_create(10);
+    hash_set(ht,"a","123");
+    hash_set(ht,"a","123");  
+    hash_set(ht,"a","123");
+    printf("%s",hash_get(ht,"a"));
+}
+*/
