@@ -56,8 +56,9 @@ char *remove_spaces(char **line_t)
 
 int print_variable(char *line)
 {
-    
-
+    printf("LOLOL   %s 1\n",line);
+    void *data = hash_get(env,line);
+    printf("%p\n",data);
 }
 
 int run_exit(char *line) 
@@ -81,11 +82,22 @@ int run_pwd(char *line)
    return -1;
 }
 
+void change_pwd()
+{
+    char my_cwd[1024];
+    getcwd(my_cwd, 1024);
+    printf("%s\n",my_cwd);
+    hash_set(env, "pwd" , "lol");
+    //printf("%s\n",hash_get(env,"pwd"));
+}
+
 int run_cd(char *line) 
 {
     if (chdir(line) != 0) {
         printf("Path not found!\n");
-    }  
+    } else {
+        change_pwd();
+    } 
     return 1;
 }
 
@@ -96,8 +108,7 @@ int run_echo(char *line)
     {
        line++;
        print_variable(line);
-
-
+       return 1;
     }	    
     if (line[0] == '"') 
     {
@@ -108,8 +119,19 @@ int run_echo(char *line)
         printf("%c",*line);
 	line++;
     }
-    printf("\n");
+    line++;
+    if (*line != '\0') 
+    {
+        line+=2;
+	printf(" ");
+	run_echo(line);
+    } else 
+    {
+        printf("\n");
+    }
+    return 1;
 }
+
 
 int run_export(char *line)  // Now line points to new variable's name 
 {
@@ -196,9 +218,10 @@ int mainloop()
 
 int main() 
 {   int status;
-    env = hash_create(10);	
+    env = hash_create(10);
+    change_pwd();   
     status = mainloop();
-    if (status == 0) 
+   if (status == 0) 
     {
 	hash_destroy(env);    
         return 0;	

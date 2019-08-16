@@ -55,7 +55,7 @@ void print_list(node_t *node)
 {
     while (node!=NULL) 
     {
-        printf("%s : %s\n",node->key, node->data);
+        printf("%s : %s\n",node->key, (char*)(node->data));
 	node = node->next;
     }
 }
@@ -149,3 +149,9 @@ void print_table(hashtable_t *ht)
         print_list(table[i]);
     }
 }
+
+//int main() {
+//    hashtable_t *ht =hash_create(10);
+//    hash_set(ht,"a","123");
+//    printf("%s",hash_get(ht,"a"));
+//}
