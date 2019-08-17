@@ -107,7 +107,7 @@ int main()
   assert(test_hash_set() == 0);
   puts("test_hash_set OK");
 
- assert(test_large() == 0);
+  assert(test_large() == 0);
   puts("test_large OK");
 
   return 0;

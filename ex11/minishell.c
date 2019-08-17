@@ -16,7 +16,7 @@ char *lsh_read_line()
   return line;
 }
 
-char *remove_spaces(char **line_t) 
+char *remove_spaces(char **line_t) //// "     exit     ",  "pwd       "  will work corectly like "exit" and "pwd"
 {
     int i = 0, j = 0;
     char *line = *line_t;
@@ -86,9 +86,7 @@ void change_pwd()
 {
     char my_cwd[1024];
     getcwd(my_cwd, 1024);
-    printf("%s\n",my_cwd);
     hash_set(env, "pwd" , "lol");
-    //printf("%s\n",hash_get(env,"pwd"));
 }
 
 int run_cd(char *line) 
@@ -141,13 +139,18 @@ int run_export(char *line)  // Now line points to new variable's name
     while (line[i] != '\0') 
     {
         if (line[i] == '=') 
-	{
-	    line[i] = '\0';
-	    value = line + i + 2;
-	}
-	i++;
+	    {
+	        line[i] = '\0';
+	        value = line + i + 1;
+	    }
+	    i++;
     }
-    line[i - 1] = '\0';
+    ///// export a=123 <=> export a="123" <=> a    =     "123"
+    while ((*value == ' ') || (*value == '"'))
+    {
+        value++;
+    }
+    line[i - (line[i - 1] == '"')] = '\0';
     hash_set(env,name,value);
     return 1;     
 }

@@ -1,6 +1,7 @@
 #include "../include/hash.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef struct  node {
     void        *data;
@@ -117,7 +118,7 @@ void *hash_get(hashtable_t *ht, char *key)
   if (head == NULL) {
       return NULL;
   }
-  while (head->key != key) 
+  while (head->key != key)
   {
     head=head->next;
   }

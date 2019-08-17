@@ -60,5 +60,6 @@ void destroy_tree(node_t *node, void (*fdestroy)(node_t *root))
     destroy_tree(node->left,fdestroy);
 	destroy_tree(node->right,fdestroy);
 	fdestroy(node);
+	free(node);
   }
 }
