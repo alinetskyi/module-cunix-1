@@ -3,7 +3,7 @@ CC					:= gcc
 
 RM					:= rm -rf
 
-LDFLAGS			    += -Llib
+LDFLAGS	    		+= -Llib
 
 CFLAGS		    	+= -Iinclude -Wall -Wextra -Werror -g
 
@@ -11,17 +11,17 @@ SRCS				:= $(wildcard src/*.c)
 
 OBJS				:= $(SRCS:.c=.o)
 
-NAME				:= atoi_test
+NAME				:= strcpy_test
 
 all:				$(NAME)
 
-$(NAME):			$(OBJS)
+$(NAME):		    $(OBJS)
 						$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS)
 
 clean:
 						$(RM) $(OBJS)
 
-fclean: 			clean
+fclean: 		    clean
 						$(RM) $(NAME)
 
 re: 				fclean all

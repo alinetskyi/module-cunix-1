@@ -1,7 +1,6 @@
 #ifndef TEST_H_
 # define TEST_H_
 
-int my_atoi(const char *nptr);
-char* my_itoa(int nmb);
+char *my_strcpy(char *dest, const char *src);
 
 #endif
