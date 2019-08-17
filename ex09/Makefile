@@ -3,7 +3,7 @@ CC					:= gcc
 
 RM					:= rm -rf
 
-LDFLAGS				+= -L../ex07 -llinked_list
+LDFLAGS				+= -L../ex07
 
 CFLAGS				+= -Iinclude -I../ex07/include -Wall -Wextra -Werror -g
 
