@@ -7,39 +7,58 @@
 
 void test_small()
 {
-  char buf[32];
-
-  assert(my_strcpy(buf, "") == buf);
-  assert(strcmp(buf, "") == 0);
-
-  assert(my_strcpy(buf, "123456789") == buf);
-  assert(strcmp(buf, "123456789") == 0);
+  assert(my_atoi("0") == 0);
+  assert(my_atoi("-0") == 0);
+  assert(my_atoi("-1") == -1);
+  assert(my_atoi("42") == 42);
+  assert(my_atoi("-42") == -42);
+  assert(my_atoi("1k") == 1);
 }
 
 void test_long()
 {
-  char        buf[32];
-  const char  *ptr;
-
-  ptr = "ooheijiewuudo8wuif5eeKoexie3aih";
-  assert(my_strcpy(buf, ptr) == buf);
-  assert(strcmp(buf, ptr) == 0);
+  assert(my_atoi("123456789") == 123456789);
+  assert(my_atoi("2147483647") == 2147483647);
+  assert(my_atoi("-2147483648") == -2147483648);
+  assert(my_atoi("4294967296") == 0);
+  assert(my_atoi("4294967298") == 2);
+  assert(my_atoi("ABC") == 0);
+  assert(my_atoi("0") == atoi("0"));
 }
 
-void          test_verif()
+void test_verif()
 {
-  char        buf[32];
-  const char  *ptr;
-
-  ptr = "lohque7iebo7in3Einga0DumijaeR7";
-  assert(strcpy(buf, ptr) == buf);
-  assert(strcmp(buf, ptr) == 0);
+  assert(atoi("0") == 0);
+  assert(atoi("-0") == 0);
+  assert(atoi("-1") == -1);
+  assert(atoi("42") == 42);
+  assert(atoi("-42") == -42);
+  assert(atoi("1k") == 1);
+  assert(atoi("123456789") == 123456789);
+  assert(atoi("2147483647") == 2147483647);
+  assert(atoi("-2147483648") == -2147483648);
+  assert(atoi("4294967296") == 0);
+  assert(atoi("4294967298") == 2);
+  assert(atoi("ABC") == 0);
+  assert(atoi("1234QWERTY1234") == 1234);
 }
 
-int main()
+void test_itoa()
+{
+
+  assert(strcmp(my_itoa(0), "0") == 0);
+  assert(strcmp(my_itoa(1), "1") == 0);
+  assert(strcmp(my_itoa(32), "32") == 0);
+  assert(strcmp(my_itoa(12345678), "12345678") == 0);
+  assert(strcmp(my_itoa(-34), "-34") == 0);
+  assert(strcmp(my_itoa(-12345678), "-12345678") == 0);
+  assert(strcmp(my_itoa(-1234567890), "-1234567890") == 0);
+}
+int   main()
 {
   test_small();
   test_long();
   test_verif();
+  test_itoa();
   return(0);
 }
